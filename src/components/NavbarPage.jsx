@@ -39,13 +39,13 @@ const NavbarPage = () => {
           {darkMode ? (
             <h1 onClick={() => setDarkMode(!darkMode)}>
               <Link>
-                <img className='w-6' src="./sun.png" alt="" />
+                <img className='w-5' src="./moon-icons.png" alt="" />
               </Link>
             </h1>
           ) : (
             <h1 onClick={() => setDarkMode(!darkMode)}>
               <Link>
-                <img className='w-5' src="./moon.png" alt="" />
+                <img className='w-6' src="./sun-icons.png" alt="" />
               </Link>
             </h1>
           )}
@@ -64,13 +64,13 @@ const NavbarPage = () => {
             {darkMode ? (
               <h1 onClick={() => setDarkMode(!darkMode)}>
                 <Link>
-                  <img className='w-6' src="./sun.png" alt="" />
+                  <img className='w-5' src="./moon-icons.png" alt="" />
                 </Link>
               </h1>
             ) : (
               <h1 onClick={() => setDarkMode(!darkMode)}>
                 <Link>
-                  <img className='w-5' src="./moon.png" alt="" />
+                  <img className='w-6' src="./sun-icons.png" alt="" />
                 </Link>
               </h1>
             )}
@@ -80,7 +80,6 @@ const NavbarPage = () => {
       )}
     </div>
   );
-  {setDarkMode && <darkMode setDarkMode={setDarkMode}/>}
 };
 
 export default NavbarPage;
