@@ -1,59 +1,101 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCode } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import { Sparkles, Code, Globe, Smartphone } from 'lucide-react';
 
-const AboutPage = ({setDarkMode}) => {
-    
-    return (
-        <>
-            <div className='bg-gray-900 dark:bg-gray-200 transition ease-in-out w-full h-auto px-6 xl:px-2 py-8 flex flex-col-reverse md:flex-row flex-wrap justify-around items-center gap-5'
-            >
-
-                <div className=' w-full sm:w-[550px] h-[400px] flex flex-col justify-center items-start'>
-                    <div className='flex items-center space-x-6'>
-                        {/* <img className='w-12' src="./coding.png" alt="" /> */}
-                        <FontAwesomeIcon className='text-white dark:text-black text-xl' icon={faCode} />
-                        <h3 className='font-mono text-3xl text-white dark:text-black'>Web Development</h3>
-                    </div>
-
-                    {/* <div className='flex items-center space-x-10'>
-                    <img className='w-12' src="./coding.png" alt="" />
-                    <h3 className='font-mono text-3xl text-white'>Web Development</h3>
-                </div>
-
-                <div className='flex items-center space-x-10'>
-                    <img className='w-12' src="./coding.png" alt="" />
-                    <h3 className='font-mono text-3xl text-white'>Web Development</h3>
-                </div> */}
-                </div>
-
-                <div className=' w-full  sm:w-[550px] h-[400px] flex flex-col justify-around items-start'>
-                    <h2 className='font-bold text-5xl dark:text-black text-white'>About me</h2>
-                    <p className='text-gray-300 dark:text-gray-500'>I'm a frontend developer, currently developing my backend skills. I can learn new
-                        frameworks and libraries and use them in my projects. I am outgoing, I can work in a
-                        team  </p>
-
-                    <div className='w-full h-32  flex justify-between items-center'>
-                        <div className='space-y-4'>
-                            <h3 className='font-bold text-4xl text-white dark:text-black'>120 <span className='text-red-500'>+</span></h3>
-                            <p className='font-medium text-sm text-gray-300 dark:text-gray-500'>Completed <br /> Project</p>
-                        </div>
-
-                        <div className='space-y-4'>
-                            <h3 className='font-bold text-4xl text-white dark:text-black'>95 <span className='text-red-500'>%</span></h3>
-                            <p className='font-medium text-sm text-gray-300 dark:text-gray-500'>Client <br /> Satisfaction</p>
-                        </div>
-
-                        <div className='space-y-4'>
-                            <h3 className='font-bold text-4xl text-white dark:text-black'>10 <span className='text-red-500'>+</span></h3>
-                            <p className='font-medium text-sm text-gray-300 dark:text-gray-500'>Years of <br /> experience</p>
-                        </div>
-                    </div>
-                </div>
-
+const About = () => {
+  return (
+    <section id="about" className="relative py-24 px-6 xl:px-16">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-16">
+          
+          {/* Right Content */}
+          <div className="flex-1 space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                <h2 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  About me
+                </h2>
+              </div>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                I'm a frontend developer, currently developing my backend skills. I can learn new
+                frameworks and libraries and use them in my projects. I am outgoing, I can work in a
+                team and always eager to take on new challenges.
+              </p>
             </div>
-        </>
-    )
-}
 
-export default AboutPage
+            <div className="grid grid-cols-3 gap-6">
+              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  3<span className="text-red-500">+</span>
+                </h3>
+                <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Completed<br />Project
+                </p>
+              </div>
+
+              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  5<span className="text-red-500">%</span>
+                </h3>
+                <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Client<br />Satisfaction
+                </p>
+              </div>
+
+              <div className="text-center p-6 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                  1<span className="text-red-500">+</span>
+                </h3>
+                <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Years of<br />experience
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Left Services */}
+          <div className="flex-1 grid gap-6">
+            <div className="group p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl">
+                  <Code className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-bold text-2xl text-gray-900 dark:text-white">Web Development</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Building responsive and modern websites using latest technologies
+              </p>
+            </div>
+
+            <div className="group p-8 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl">
+                  <Globe className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-bold text-2xl text-gray-900 dark:text-white">UI/UX Design</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Creating beautiful and intuitive user interfaces
+              </p>
+            </div>
+
+            <div className="group p-8 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl">
+                  <Smartphone className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-bold text-2xl text-gray-900 dark:text-white">Responsive Design</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Ensuring perfect display across all devices
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;

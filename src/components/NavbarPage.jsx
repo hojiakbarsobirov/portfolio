@@ -1,85 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
-const NavbarPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [darkMode, setDarkMode] = useState(() => {
-    const saveMode = localStorage.getItem('darkMode')
-    return saveMode ? JSON.parse(saveMode) : false
-  })
-
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.parse(darkMode))
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [darkMode])
-
+const Navbar = ({ isOpen, setIsOpen, darkMode, setDarkMode, activeSection, scrollToSection, scrolled }) => {
   return (
-    <div className='bg-gray-900 dark:bg-gray-200 shadow-md w-full h-24 transition ease-in-out flex items-center justify-between px-6 md:px-16 relative'>
-      <h1 className='font-bold text-md xl:text-2xl dark:text-black text-white'>HOJIAKBAR SOBIROV</h1>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-gray-200 dark:border-gray-800' 
+        : 'bg-transparent'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        <div className="flex justify-between items-center h-24">
+          <h1 className="font-bold text-xl xl:text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+            HOJIAKBAR SOBIROV
+          </h1>
 
-      <button
-        className='text-white text-2xl md:hidden dark:text-black'
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        ☰
-      </button>
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex items-center space-x-10">
+            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
+              <li
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className={`cursor-pointer font-medium transition-all duration-300 relative group ${
+                  activeSection === item.toLowerCase()
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
+              >
+                {item}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ${
+                  activeSection === item.toLowerCase() ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
+              </li>
+            ))}
+            <li>
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110"
+              >
+                {darkMode ? (
+                  <Sun className="w-5 h-5 text-yellow-500" />
+                ) : (
+                  <Moon className="w-5 h-5 text-gray-700" />
+                )}
+              </button>
+            </li>
+          </ul>
 
-      <ul className='hidden md:flex space-x-10 text-white font-medium dark:bg-gray-200'>
-        <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Home</li>
-        <li className='cursor-pointer hover:text-gray-400 dark:text-black'>About</li>
-        <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Projects</li>
-        <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Contacts</li>
-
-        <div className='w-10 cursor-pointer'>
-          {darkMode ? (
-            <h1 onClick={() => setDarkMode(!darkMode)}>
-              <Link>
-                <img className='w-5' src="./moon-icons.png" alt="" />
-              </Link>
-            </h1>
-          ) : (
-            <h1 onClick={() => setDarkMode(!darkMode)}>
-              <Link>
-                <img className='w-6' src="./sun-icons.png" alt="" />
-              </Link>
-            </h1>
-          )}
-        </div>
-
-      </ul>
-
-      {isOpen && (
-        <ul className='absolute top-24 left-0 w-full bg-gray-900 dark:bg-gray-200 shadow-lg flex flex-col items-center space-y-6 py-6 text-white font-medium md:hidden'>
-          <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Home</li>
-          <li className='cursor-pointer hover:text-gray-400 dark:text-black'>About</li>
-          <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Projects</li>
-          <li className='cursor-pointer hover:text-gray-400 dark:text-black'>Contacts</li>
-
-          <div className='w-10 cursor-pointer'>
-            {darkMode ? (
-              <h1 onClick={() => setDarkMode(!darkMode)}>
-                <Link>
-                  <img className='w-5' src="./moon-icons.png" alt="" />
-                </Link>
-              </h1>
-            ) : (
-              <h1 onClick={() => setDarkMode(!darkMode)}>
-                <Link>
-                  <img className='w-6' src="./sun-icons.png" alt="" />
-                </Link>
-              </h1>
-            )}
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-700" />
+              )}
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-900 dark:text-white p-2"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
+        </div>
+      </div>
 
-        </ul>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden absolute top-24 left-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-xl border-b border-gray-200 dark:border-gray-800">
+          <ul className="flex flex-col items-center space-y-6 py-8">
+            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
+              <li
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className={`cursor-pointer font-medium text-lg transition-colors ${
+                  activeSection === item.toLowerCase()
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
-    </div>
+    </nav>
   );
 };
 
-export default NavbarPage;
+export default Navbar;

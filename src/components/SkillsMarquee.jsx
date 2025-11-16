@@ -1,20 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-const SkillsMarquee = () => {
+const SkillsMarquee = ({ skills }) => {
   return (
-    <div className='bg-gray-700 dark:bg-white w-full h-24 flex justify-center items-center'>
-      <marquee className="w-[92%] h-auro py-8 flex flex-wrap justify-start text-white items-center">
-        <div className='w-full h-full flex justify-around space-x-20 items-start font-medium text-gray-500 dark:text-gray-300 text-3xl'>
-          <h3>HTML</h3>
-          <h3>CSS</h3>
-          <h3>Bootstrap</h3>
-          <h3>Tailwind</h3>
-          <h3>JavaScript</h3>
-          <h3>React Js</h3>
+    <section className="relative py-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 border-y border-gray-200 dark:border-gray-700">
+      <div className="overflow-hidden">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...skills, ...skills].map((skill, index) => (
+            <div key={index} className="inline-flex items-center mx-8">
+              <span className="text-2xl xl:text-3xl font-bold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {skill.name}
+              </span>
+              <span className="mx-8 text-gray-400 dark:text-gray-600">•</span>
+            </div>
+          ))}
         </div>
-      </marquee>
-    </div>
-  )
-}
+      </div>
+    </section>
+  );
+};
 
-export default SkillsMarquee
+export default SkillsMarquee;
