@@ -2,13 +2,11 @@ import React from 'react';
 
 const Skills = ({ skills }) => {
   return (
-    <section id="skills" className="relative py-24 px-6 xl:px-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <section id="skills" className="relative py-24 px-6 xl:px-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-bold text-4xl xl:text-5xl mb-4">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Technical Skills
-            </span>
+          <h2 className="font-bold text-4xl xl:text-5xl mb-4 text-blue-600 dark:text-blue-400">
+            Technical Skills
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
             My expertise in modern web technologies
@@ -22,13 +20,13 @@ const Skills = ({ skills }) => {
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
                   {skill.name}
                 </span>
-                <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
                   {skill.level}%
                 </span>
               </div>
               <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div
-                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg`}
+                  className="h-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-500 rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg group-hover:shadow-blue-500/50"
                   style={{ width: `${skill.level}%` }}
                 />
               </div>

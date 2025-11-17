@@ -93,9 +93,9 @@ A modern and user-friendly registration website built for RusPeak.uz, designed t
       link: "https://your-analytics.com",
     },
     {
-      title: "Restaurant Ordering System",
+      title: "Portfolio Web Site ",
       description:
-        "Modern restaurant website with online ordering, reservation system, and real-time order tracking",
+        "A fully responsive portfolio website built to present my projects and skills, featuring a clean UI and optimized performance.",
       image: "/resume-projects.png",
       tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
       gradient: "from-orange-500 to-red-500",

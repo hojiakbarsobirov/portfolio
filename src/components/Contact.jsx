@@ -13,7 +13,7 @@ const Contact = () => {
 
   // Telegram Bot Configuration
   const TELEGRAM_BOT_TOKEN = '8306819779:AAHi4LbRyVsJeplzW1DN4EimCDLxEAzA2ww';
-  const TELEGRAM_CHAT_ID = '7671368706'; // TO'G'RI CHAT ID KIRITING!
+  const TELEGRAM_CHAT_ID = '7671368706';
 
   const handleChange = (e) => {
     setFormData({
@@ -29,7 +29,7 @@ const Contact = () => {
 
     // Validation
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      setStatus({ type: 'error', message: 'Iltimos, barcha maydonlarni to\'ldiring!' });
+      setStatus({ type: 'error', message: 'Please fill in all fields!' });
       setLoading(false);
       return;
     }
@@ -37,23 +37,23 @@ const Contact = () => {
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setStatus({ type: 'error', message: 'Iltimos, to\'g\'ri email manzil kiriting!' });
+      setStatus({ type: 'error', message: 'Please enter a valid email address!' });
       setLoading(false);
       return;
     }
 
     // Telegram message format
     const telegramMessage = `
-🆕 Yangi Portfolio Xabari!
+🆕 New Portfolio Message!
 
-👤 Ism: ${formData.name}
+👤 Name: ${formData.name}
 📧 Email: ${formData.email}
-📝 Mavzu: ${formData.subject}
+📝 Subject: ${formData.subject}
 
-💬 Xabar:
+💬 Message:
 ${formData.message}
 
-⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}
+⏰ Time: ${new Date().toLocaleString('en-US')}
     `.trim();
 
     try {
@@ -76,7 +76,7 @@ ${formData.message}
       if (data.ok) {
         setStatus({ 
           type: 'success', 
-          message: 'Xabaringiz muvaffaqiyatli yuborildi! Tez orada javob beraman.' 
+          message: 'Your message has been sent successfully! I\'ll get back to you soon.' 
         });
         // Reset form
         setFormData({
@@ -86,23 +86,23 @@ ${formData.message}
           message: ''
         });
       } else {
-        // Xatolik haqida batafsil ma'lumot
+        // Detailed error information
         console.error('Telegram API Error:', data);
         
         if (data.description && data.description.includes('chat not found')) {
           setStatus({ 
             type: 'error', 
-            message: 'Chat ID noto\'g\'ri! Iltimos, to\'g\'ri Chat ID kiriting. Quyida ko\'rsatma bor.' 
+            message: 'Chat ID is incorrect! Please enter the correct Chat ID.' 
           });
         } else {
-          throw new Error(data.description || 'Xatolik yuz berdi');
+          throw new Error(data.description || 'An error occurred');
         }
       }
     } catch (error) {
       console.error('Error:', error);
       setStatus({ 
         type: 'error', 
-        message: 'Xabar yuborishda xatolik yuz berdi. Iltimos, Chat ID ni tekshiring yoki qaytadan urinib ko\'ring.' 
+        message: 'An error occurred while sending the message. Please try again.' 
       });
     } finally {
       setLoading(false);
@@ -113,14 +113,12 @@ ${formData.message}
     <section id="contact" className="relative py-24 px-6 xl:px-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border border-blue-500/20 dark:border-blue-500/30 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/30 rounded-full mb-4">
             <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Get In Touch</span>
           </div>
-          <h2 className="font-bold text-4xl xl:text-5xl mb-4">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Let's Work Together
-            </span>
+          <h2 className="font-bold text-4xl xl:text-5xl mb-4 text-blue-600 dark:text-blue-400">
+            Let's Work Together
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
             Have a project in mind? Let's create something amazing together
@@ -131,17 +129,17 @@ ${formData.message}
           {status.message && (
             <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
               status.type === 'success' 
-                ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' 
+                ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800' 
                 : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
             }`}>
               {status.type === 'success' ? (
-                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+                <CheckCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               ) : (
                 <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
               )}
               <p className={`text-sm font-medium ${
                 status.type === 'success' 
-                  ? 'text-green-800 dark:text-green-300' 
+                  ? 'text-blue-800 dark:text-blue-300' 
                   : 'text-red-800 dark:text-red-300'
               }`}>
                 {status.message}
@@ -153,14 +151,14 @@ ${formData.message}
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Ismingiz <span className="text-red-500">*</span>
+                  Your Name <span className="text-blue-500">*</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Hojiakbar Sobirov"
+                  placeholder="John Doe"
                   required
                   disabled={loading}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 dark:text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -168,14 +166,14 @@ ${formData.message}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Email manzilingiz <span className="text-red-500">*</span>
+                  Your Email <span className="text-blue-500">*</span>
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="hojiakbar@example.com"
+                  placeholder="john@example.com"
                   required
                   disabled={loading}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 dark:text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -185,14 +183,14 @@ ${formData.message}
             
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Mavzu <span className="text-red-500">*</span>
+                Subject <span className="text-blue-500">*</span>
               </label>
               <input
                 type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="Loyiha haqida so'rov"
+                placeholder="Project inquiry"
                 required
                 disabled={loading}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 dark:text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -201,14 +199,14 @@ ${formData.message}
             
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Xabaringiz <span className="text-red-500">*</span>
+                Your Message <span className="text-blue-500">*</span>
               </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows={6}
-                placeholder="Loyihangiz haqida bizga ayting..."
+                placeholder="Tell us about your project..."
                 required
                 disabled={loading}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
@@ -218,16 +216,16 @@ ${formData.message}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="w-full py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {loading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Yuborilmoqda...
+                  Sending...
                 </>
               ) : (
                 <>
-                  Xabar Yuborish
+                  Send Message
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}
@@ -240,7 +238,7 @@ ${formData.message}
             href="mailto:hojiakbarsobirov30@gmail.com"
             className="flex items-center gap-4 p-6 bg-white dark:bg-gray-800 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700 group"
           >
-            <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl group-hover:scale-110 transition-transform">
+            <div className="p-3 bg-blue-600 dark:bg-blue-500 rounded-xl group-hover:scale-110 transition-transform">
               <Mail className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -255,7 +253,7 @@ ${formData.message}
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-6 bg-white dark:bg-gray-800 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700 group"
           >
-            <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl group-hover:scale-110 transition-transform">
+            <div className="p-3 bg-blue-600 dark:bg-blue-500 rounded-xl group-hover:scale-110 transition-transform">
               <Github className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -270,7 +268,7 @@ ${formData.message}
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-6 bg-white dark:bg-gray-800 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700 group"
           >
-            <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl group-hover:scale-110 transition-transform">
+            <div className="p-3 bg-blue-600 dark:bg-blue-500 rounded-xl group-hover:scale-110 transition-transform">
               <Linkedin className="w-6 h-6 text-white" />
             </div>
             <div>

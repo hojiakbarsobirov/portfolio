@@ -12,7 +12,7 @@ const About = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                <h2 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <h2 className="font-bold text-4xl xl:text-5xl text-blue-600 dark:text-blue-400">
                   About me
                 </h2>
               </div>
@@ -25,27 +25,27 @@ const About = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
-                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  3<span className="text-red-500">+</span>
+              <div className="text-center p-6 bg-blue-50 dark:bg-gray-800 rounded-2xl hover:scale-105 transition-transform duration-300 border border-blue-200 dark:border-gray-700">
+                <h3 className="font-bold text-4xl xl:text-5xl text-blue-600 dark:text-blue-400">
+                  3<span className="text-blue-500">+</span>
                 </h3>
                 <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Completed<br />Project
                 </p>
               </div>
 
-              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
-                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  5<span className="text-red-500">%</span>
+              <div className="text-center p-6 bg-blue-50 dark:bg-gray-800 rounded-2xl hover:scale-105 transition-transform duration-300 border border-blue-200 dark:border-gray-700">
+                <h3 className="font-bold text-4xl xl:text-5xl text-blue-600 dark:text-blue-400">
+                  95<span className="text-blue-500">%</span>
                 </h3>
                 <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Client<br />Satisfaction
                 </p>
               </div>
 
-              <div className="text-center p-6 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl hover:scale-105 transition-transform duration-300">
-                <h3 className="font-bold text-4xl xl:text-5xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  1<span className="text-red-500">+</span>
+              <div className="text-center p-6 bg-blue-50 dark:bg-gray-800 rounded-2xl hover:scale-105 transition-transform duration-300 border border-blue-200 dark:border-gray-700">
+                <h3 className="font-bold text-4xl xl:text-5xl text-blue-600 dark:text-blue-400">
+                  1<span className="text-blue-500">+</span>
                 </h3>
                 <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Years of<br />experience
@@ -56,9 +56,9 @@ const About = () => {
 
           {/* Left Services */}
           <div className="flex-1 grid gap-6">
-            <div className="group p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+            <div className="group p-8 bg-blue-50 dark:bg-gray-800 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-blue-200 dark:border-gray-700">
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl">
+                <div className="p-4 bg-blue-600 dark:bg-blue-500 rounded-2xl">
                   <Code className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-bold text-2xl text-gray-900 dark:text-white">Web Development</h3>
@@ -68,9 +68,9 @@ const About = () => {
               </p>
             </div>
 
-            <div className="group p-8 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+            <div className="group p-8 bg-blue-50 dark:bg-gray-800 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-blue-200 dark:border-gray-700">
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl">
+                <div className="p-4 bg-blue-600 dark:bg-blue-500 rounded-2xl">
                   <Globe className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-bold text-2xl text-gray-900 dark:text-white">UI/UX Design</h3>
@@ -80,9 +80,9 @@ const About = () => {
               </p>
             </div>
 
-            <div className="group p-8 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+            <div className="group p-8 bg-blue-50 dark:bg-gray-800 rounded-3xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-blue-200 dark:border-gray-700">
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl">
+                <div className="p-4 bg-blue-600 dark:bg-blue-500 rounded-2xl">
                   <Smartphone className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-bold text-2xl text-gray-900 dark:text-white">Responsive Design</h3>
