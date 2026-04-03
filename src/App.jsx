@@ -8,12 +8,12 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/FooterPage";
 
-// ✅ To'g'ri import (agar rasm src/assets da bo'lsa)
-// import LandingPage from './assets/landing-page.png'
-
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem("darkMode");
+    return saved !== null ? JSON.parse(saved) : true;
+  });
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -24,6 +24,7 @@ function App() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
   useEffect(() => {
@@ -77,10 +78,10 @@ function App() {
       title: "RuSpeak.uz online course",
       description: `RusPeak — Online Russian Language Course Registration Platform.
 A modern and user-friendly registration website built for RusPeak.uz, designed to streamline student enrollment for online Russian language courses. The platform offers a clean UI, responsive design, and optimized user flow, making the sign-up process simple, fast, and intuitive.`,
-      image: "/landing-page.png", // ✅ Public papkadagi rasm
+      image: "/landing-page.png",
       tech: ["React.js", "Firebase", "Tailwind CSS"],
       gradient: "from-purple-500 to-pink-500",
-      link: "https://ruspeak.vercel.app", // ✅ To'liq URL bilan
+      link: "https://ruspeak.vercel.app",
     },
     {
       title: "RuSpeak.uz for Admin-Pannel",
@@ -100,6 +101,24 @@ A modern and user-friendly registration website built for RusPeak.uz, designed t
       tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
       gradient: "from-orange-500 to-red-500",
       link: "https://rezume-project.vercel.app/",
+    },
+    {
+      title: "RuSpeak-Test Web Site ",
+      description:
+        "RuSpeak-Test is an online platform that quickly and easily determines your Russian language level.",
+      image: "/portfolio4.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
+      gradient: "from-orange-500 to-red-500",
+      link: "https://ruspeak-test.vercel.app/",
+    },
+    {
+      title: "LifeOS — Life Operating System Web Site ",
+      description:
+        "LifeOS is a modern system designed to organize, plan, and manage your daily life.",
+      image: "/lifeos-img.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
+      gradient: "from-orange-500 to-red-500",
+      link: "https://life-os-panel.vercel.app/",
     },
   ];
 

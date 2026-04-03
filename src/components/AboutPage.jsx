@@ -27,7 +27,7 @@ const About = () => {
             <div className="grid grid-cols-3 gap-6">
               <div className="text-center p-6 bg-blue-50 dark:bg-gray-800 rounded-2xl hover:scale-105 transition-transform duration-300 border border-blue-200 dark:border-gray-700">
                 <h3 className="font-bold text-4xl xl:text-5xl text-blue-600 dark:text-blue-400">
-                  3<span className="text-blue-500">+</span>
+                  5<span className="text-blue-500">+</span>
                 </h3>
                 <p className="font-medium text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Completed<br />Project
