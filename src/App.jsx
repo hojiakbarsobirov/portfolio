@@ -65,6 +65,7 @@ export default function App() {
       <Footer scrollTo={scrollTo} />
 
       <ChatWidget />
+      <div></div>
     </>
   );
 }
