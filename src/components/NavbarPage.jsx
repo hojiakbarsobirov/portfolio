@@ -418,7 +418,7 @@ export default function Navbar({ activeSection, scrollTo }) {
             tabIndex={0}
             onKeyDown={(e) => e.key === 'Enter' && handleNav('home')}
           >
-            HOJIAKBAR<span>.</span>DEV
+            HOJIAKBAR<span>.</span>CODES
           </div>
 
           {/* Desktop Nav */}

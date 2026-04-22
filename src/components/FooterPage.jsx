@@ -161,7 +161,7 @@ export default function Footer({ scrollTo }) {
             {/* Brand */}
             <div className="footer-brand">
               <div className="footer-logo">
-                HOJIAKBAR<span>.</span>DEV
+                HOJIAKBAR<span>.</span>CODES
               </div>
               <p className="footer-tagline">
                 Zamonaviy veb-saytlar va ilovalar yaratuvchi
