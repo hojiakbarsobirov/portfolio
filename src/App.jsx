@@ -1,212 +1,70 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "./components/NavbarPage";
-import Hero from "./components/Hero";
-import SkillsMarquee from "./components/SkillsMarquee";
-import About from "./components/AboutPage";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import Footer from "./components/FooterPage";
+import { useState, useEffect } from 'react';
+import Navbar       from './components/NavbarPage';
+import Hero         from './components/Hero';
+import SkillsMarquee from './components/SkillsMarquee';
+import About        from './components/AboutPage';
+import Skills       from './components/Skills';
+import Projects     from './components/Projects';
+import Contact      from './components/Contact';
+import Footer       from './components/FooterPage';
+import ChatWidget   from './components/ChatWidget';
+import './index.css';
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem("darkMode");
-    return saved !== null ? JSON.parse(saved) : true;
-  });
-  const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+export default function App() {
+  const [activeSection, setActiveSection] = useState('home');
 
+  // Track active section on scroll
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
+    const SECTIONS = ['home', 'about', 'skills', 'projects', 'contact'];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0,
+      }
+    );
 
-      const sections = ["home", "about", "skills", "projects", "contact"];
-      const current = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
-    };
+    SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 68; // navbar height
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
-  const skills = [
-    { name: "HTML", level: 95, color: "from-orange-500 to-red-500" },
-    { name: "CSS", level: 90, color: "from-blue-500 to-cyan-500" },
-    { name: "Bootstrap", level: 85, color: "from-purple-500 to-pink-500" },
-    { name: "Tailwind CSS", level: 92, color: "from-cyan-500 to-blue-500" },
-    { name: "JavaScript", level: 88, color: "from-yellow-500 to-orange-500" },
-    { name: "React JS", level: 87, color: "from-blue-400 to-cyan-400" },
-  ];
-
-  const projects = [
-    {
-      title: "RuSpeak.uz online course",
-      description: `RusPeak — Online Russian Language Course Registration Platform.
-A modern and user-friendly registration website built for RusPeak.uz, designed to streamline student enrollment for online Russian language courses. The platform offers a clean UI, responsive design, and optimized user flow, making the sign-up process simple, fast, and intuitive.`,
-      image: "/landing-page.png",
-      tech: ["React.js", "Firebase", "Tailwind CSS"],
-      gradient: "from-purple-500 to-pink-500",
-      link: "https://ruspeak.vercel.app",
-    },
-    {
-      title: "RuSpeak.uz for Admin-Pannel",
-      description:
-        "Includes an integrated LMS dashboard for managing leads coming from RusPeak.uz, allowing administrators to track, organize, and follow up with student registrations efficiently.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
-      tech: ["React.js", "Chart.js", "Bootstrap", "Firebase"],
-      gradient: "from-pink-500 to-rose-500",
-      link: "https://your-analytics.com",
-    },
-    {
-      title: "Portfolio Web Site ",
-      description:
-        "A fully responsive portfolio website built to present my projects and skills, featuring a clean UI and optimized performance.",
-      image: "/resume-projects.png",
-      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
-      gradient: "from-orange-500 to-red-500",
-      link: "https://rezume-project.vercel.app/",
-    },
-    {
-      title: "RuSpeak-Test Web Site ",
-      description:
-        "RuSpeak-Test is an online platform that quickly and easily determines your Russian language level.",
-      image: "/portfolio4.png",
-      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
-      gradient: "from-orange-500 to-red-500",
-      link: "https://ruspeak-test.vercel.app/",
-    },
-    {
-      title: "LifeOS — Life Operating System Web Site ",
-      description:
-        "LifeOS is a modern system designed to organize, plan, and manage your daily life.",
-      image: "/lifeos-img.png",
-      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
-      gradient: "from-orange-500 to-red-500",
-      link: "https://life-os-panel.vercel.app/",
-    },
-  ];
-
   return (
     <>
-      <style>
-        {`
-          @keyframes marquee {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          
-          .animate-marquee {
-            animation: marquee 20s linear infinite;
-          }
-          
-          .animate-gradient {
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
-          }
-          
-          @keyframes gradient {
-            0%, 100% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-          }
-          
-          .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-        `}
-      </style>
+      <Navbar activeSection={activeSection} scrollTo={scrollTo} />
 
-      <div className={darkMode ? "dark" : ""}>
-        <div className="relative bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-500">
-          {/* Animated Background */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
-            <div
-              className="absolute w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl transition-all duration-300"
-              style={{
-                left: `${mousePosition.x - 192}px`,
-                top: `${mousePosition.y - 192}px`,
-              }}
-            />
-            <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-r from-pink-500/10 to-orange-500/10 dark:from-pink-500/20 dark:to-orange-500/20 rounded-full blur-3xl animate-pulse" />
-            <div
-              className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 dark:from-cyan-500/20 dark:to-blue-500/20 rounded-full blur-3xl animate-pulse"
-              style={{ animationDelay: "1s" }}
-            />
-          </div>
+      <main>
+        <Hero scrollTo={scrollTo} />
+        <SkillsMarquee />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
 
-          <Navbar
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-            activeSection={activeSection}
-            scrollToSection={scrollToSection}
-            scrolled={scrolled}
-          />
+      <Footer scrollTo={scrollTo} />
 
-          <Hero scrollToSection={scrollToSection} />
-
-          <SkillsMarquee skills={skills} />
-
-          <About />
-
-          <Skills skills={skills} />
-
-          <Projects projects={projects} />
-
-          <Contact />
-
-          <Footer />
-        </div>
-      </div>
+      {/* Floating AI Chat */}
+      <ChatWidget />
     </>
   );
 }
-
-export default App;
