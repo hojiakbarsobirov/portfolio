@@ -4,7 +4,7 @@ const TELEGRAM_BOT_TOKEN = '8306819779:AAHi4LbRyVsJeplzW1DN4EimCDLxEAzA2ww';
 const TELEGRAM_CHAT_ID   = '7671368706';
 
 async function sendToTelegram(data) {
-  const text = `📬 Yangi xabar (Contact forma)!\n\n👤 Ism: ${data.name}\n📧 Email: ${data.email}\n💬 Xabar:\n${data.message}\n\n⏰ ${new Date().toLocaleString('uz-UZ')}`;
+  const text = `📬 Yangi xabar (Contact forma)!\n\n👤 Ism: ${data.name}\n📧 Email: ${data.email}\n📞 Telefon: ${data.phone}\n💬 Xabar:\n${data.message}\n\n⏰ ${new Date().toLocaleString('uz-UZ')}`;
   const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -16,7 +16,7 @@ async function sendToTelegram(data) {
 
 export default function Contact() {
   const sectionRef = useRef(null);
-  const [form, setForm]       = useState({ name: '', email: '', message: '' });
+  const [form, setForm]       = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus]   = useState(null); // 'success' | 'error' | null
   const [loading, setLoading] = useState(false);
 
@@ -42,13 +42,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return;
+    if (!form.name || !form.email || !form.phone || !form.message) return;
     setLoading(true);
     setStatus(null);
     try {
       await sendToTelegram(form);
       setStatus('success');
-      setForm({ name: '', email: '', message: '' });
+      setForm({ name: '', email: '', phone: '', message: '' });
     } catch {
       setStatus('error');
     } finally {
@@ -162,6 +162,36 @@ export default function Contact() {
           font-size: clamp(14px, 1.8vw, 16px);
           color: #6b7280;
           line-height: 1.75;
+          margin-bottom: 20px;
+        }
+
+        /* Telegram CTA button */
+        .telegram-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 13px 22px;
+          background: #229ED9;
+          color: #fff;
+          border: none;
+          border-radius: 12px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+          box-shadow: 0 4px 14px rgba(34, 158, 217, 0.3);
+        }
+
+        .telegram-cta-btn:hover {
+          background: #1a8bbf;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(34, 158, 217, 0.4);
+        }
+
+        .telegram-cta-btn:active {
+          transform: scale(0.98);
         }
 
         /* Socials */
@@ -273,6 +303,7 @@ export default function Contact() {
           outline: none;
           transition: border-color 0.2s, box-shadow 0.2s;
           resize: none;
+          box-sizing: border-box;
         }
 
         .form-input::placeholder, .form-textarea::placeholder {
@@ -405,6 +436,19 @@ export default function Contact() {
                   odatda bir kun ichida javob beraman. Yoki quyidagi chat
                   orqali darhol muloqot qilishingiz mumkin.
                 </p>
+
+                {/* Telegram CTA Button */}
+                <a
+                  href="https://t.me/sobrvkh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="telegram-cta-btn"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                  </svg>
+                  Biz bilan bog'laning
+                </a>
               </div>
 
               <div className="socials-list fade-item">
@@ -459,6 +503,21 @@ export default function Contact() {
                       disabled={loading}
                     />
                   </div>
+                </div>
+
+                {/* Phone field — full width */}
+                <div className="form-group">
+                  <label className="form-label">Telefon raqam</label>
+                  <input
+                    className="form-input"
+                    type="tel"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="+998 90 123 45 67"
+                    required
+                    disabled={loading}
+                  />
                 </div>
 
                 <div className="form-group">
